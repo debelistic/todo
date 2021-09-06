@@ -9,10 +9,6 @@ export interface TaskType extends mongoose.Document  {
   name: string;
 }
 export const TaskSchema = new Schema({
-  id: {
-    type: String,
-    default: () => nanoid(6),
-  },
   name: {
     type: String,
     require: true,

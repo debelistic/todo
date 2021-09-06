@@ -10,14 +10,7 @@ import Routes from './routes';
 
 config();
 
-// mongoose.set('useNewUrlParser', true);
-// mongoose.set('useUnifiedTopology', true);
-// mongoose.set('useCreateIndex', true);
-// mongoose.set('useFindAndModify', false);
-// mongoose.set('bufferCommands', false);
-
-mongoose.connect('', (err) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+mongoose.connect(process.env.MONGO_URI!, (err) => {
   err ? log(`error connecting to db ${err}`) : log('database connected');
 });
 
@@ -32,5 +25,9 @@ app.use(json());
 
 app.use(Routes);
 
+const port = process.env.PORT || 3000
+
 log(`app running in ${process.env.NODE_ENV?.toUpperCase()} environment.`);
+app.listen(port, () => log(`Running on port ${port}.`));
+
 export default app;
